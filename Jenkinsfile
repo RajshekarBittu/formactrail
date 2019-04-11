@@ -1,17 +1,17 @@
 pipeline {
     agent any
+    tools {
+        maven 'M2_HOME'
+    }
     options {
         checkoutToSubdirectory('source')
     }
-    tools {
-        maven 'M2_HOME'
-       
-    }
+    
     stages {
         stage ('Build') {
-            
+          
             steps {
-                dir ('source') {
+                dir ('source/Hello-world-CICD-master') {
                     sh '''mvn -Dmaven.test.failure.ignore=true clean install
                           cp -R target/*.war ansible/hello-world.war'''
                 }
